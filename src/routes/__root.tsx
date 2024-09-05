@@ -22,7 +22,7 @@ export const Route = createRootRoute({
           <li className="flex flex-col items-center text-gray-500">
             <Link
               className="\\\\ flex flex-col items-center gap-1 text-gray-500 [&.active]:text-white"
-              to="/about"
+              to="/user"
             >
               <Search />
               Sign Up

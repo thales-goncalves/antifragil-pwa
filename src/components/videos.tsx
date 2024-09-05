@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel'
 
 export const Videos = () => {
-  const [videos, setVideos] = useState<any[]>()
+  const [videos, setVideos] = useState<unknown[]>()
   useEffect(() => {
     sanityClient
       .fetch(`* [ _type == "video" ]`)
@@ -27,7 +27,7 @@ export const Videos = () => {
           }}
         >
           <CarouselContent>
-            {[1, 2, 3, 4, 5, 6, 7].map((video, index) => (
+            {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
               <CarouselItem
                 key={index}
                 className="basis-auto border border-yellow-500"
@@ -59,7 +59,7 @@ export const Videos = () => {
           }}
         >
           <CarouselContent>
-            {[1, 2, 3, 4, 5].map((video, index) => (
+            {[1, 2, 3, 4, 5].map((_, index) => (
               <CarouselItem
                 key={index}
                 className="basis-auto border border-yellow-500"
@@ -91,7 +91,7 @@ export const Videos = () => {
           }}
         >
           <CarouselContent>
-            {[1, 2, 3].map((video, index) => (
+            {videos?.map((_, index) => (
               <CarouselItem
                 key={index}
                 className="basis-auto border border-yellow-500"
