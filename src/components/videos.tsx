@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sanityClient } from '@/libs/sanity/client'
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
@@ -16,7 +17,7 @@ export const Videos = () => {
     <div className="flex flex-col gap-8">
       <div>
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Videos</h3>
+          <h3 className="text-lg font-semibold">Programs</h3>
           <Link to="/" className="text-green-500">
             See all
           </Link>
@@ -27,7 +28,38 @@ export const Videos = () => {
           }}
         >
           <CarouselContent>
-            {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
+            {videos?.map((video: any, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-auto border border-yellow-500"
+              >
+                <Link
+                  to="/videos/$videoId"
+                  params={{ videoId: video.slug.current }}
+                >
+                  <div
+                    className={`h-[160px] w-[260px] rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-300`}
+                  />
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Programs</h3>
+          <Link to="/" className="text-green-500">
+            See all
+          </Link>
+        </div>
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+        >
+          <CarouselContent>
+            {videos?.map((_, index) => (
               <CarouselItem
                 key={index}
                 className="basis-auto border border-yellow-500"
@@ -48,7 +80,7 @@ export const Videos = () => {
       </div>
       <div>
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Categories</h3>
+          <h3 className="text-lg font-semibold">Programs</h3>
           <Link to="/" className="text-green-500">
             See all
           </Link>
@@ -59,7 +91,71 @@ export const Videos = () => {
           }}
         >
           <CarouselContent>
-            {[1, 2, 3, 4, 5].map((_, index) => (
+            {videos?.map((_, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-auto border border-yellow-500"
+              >
+                <div
+                  className={`h-[160px] w-[260px] rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-300`}
+                ></div>
+                {/* <iframe
+                rel="0"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                src={video.youtube_url}
+              /> */}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Programs</h3>
+          <Link to="/" className="text-green-500">
+            See all
+          </Link>
+        </div>
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+        >
+          <CarouselContent>
+            {videos?.map((_, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-auto border border-yellow-500"
+              >
+                <div
+                  className={`h-[160px] w-[260px] rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-300`}
+                ></div>
+                {/* <iframe
+                rel="0"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                src={video.youtube_url}
+              /> */}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Programs</h3>
+          <Link to="/" className="text-green-500">
+            See all
+          </Link>
+        </div>
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+        >
+          <CarouselContent>
+            {videos?.map((_, index) => (
               <CarouselItem
                 key={index}
                 className="basis-auto border border-yellow-500"

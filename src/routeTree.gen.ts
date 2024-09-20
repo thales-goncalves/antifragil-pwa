@@ -13,35 +13,77 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as VideosVideoIdImport } from './routes/videos/$videoId'
+import { Route as ProgramsProgramIdImport } from './routes/programs/$programId'
 
 // Create Virtual Routes
 
-const UserLazyImport = createFileRoute('/user')()
-const SignUpLazyImport = createFileRoute('/sign-up')()
-const SignInLazyImport = createFileRoute('/sign-in')()
 const IndexLazyImport = createFileRoute('/')()
+const SignUpIndexLazyImport = createFileRoute('/sign-up/')()
+const SignInIndexLazyImport = createFileRoute('/sign-in/')()
+const ProgramsIndexLazyImport = createFileRoute('/programs/')()
+const ProfileIndexLazyImport = createFileRoute('/profile/')()
+const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
+const CollectionsIndexLazyImport = createFileRoute('/collections/')()
+const AboutIndexLazyImport = createFileRoute('/about/')()
 
 // Create/Update Routes
-
-const UserLazyRoute = UserLazyImport.update({
-  path: '/user',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/user.lazy').then((d) => d.Route))
-
-const SignUpLazyRoute = SignUpLazyImport.update({
-  path: '/sign-up',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/sign-up.lazy').then((d) => d.Route))
-
-const SignInLazyRoute = SignInLazyImport.update({
-  path: '/sign-in',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/sign-in.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const SignUpIndexLazyRoute = SignUpIndexLazyImport.update({
+  path: '/sign-up/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/sign-up/index.lazy').then((d) => d.Route))
+
+const SignInIndexLazyRoute = SignInIndexLazyImport.update({
+  path: '/sign-in/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/sign-in/index.lazy').then((d) => d.Route))
+
+const ProgramsIndexLazyRoute = ProgramsIndexLazyImport.update({
+  path: '/programs/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/programs/index.lazy').then((d) => d.Route),
+)
+
+const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
+  path: '/profile/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+
+const DashboardIndexLazyRoute = DashboardIndexLazyImport.update({
+  path: '/dashboard/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/dashboard/index.lazy').then((d) => d.Route),
+)
+
+const CollectionsIndexLazyRoute = CollectionsIndexLazyImport.update({
+  path: '/collections/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/collections/index.lazy').then((d) => d.Route),
+)
+
+const AboutIndexLazyRoute = AboutIndexLazyImport.update({
+  path: '/about/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about/index.lazy').then((d) => d.Route))
+
+const VideosVideoIdRoute = VideosVideoIdImport.update({
+  path: '/videos/$videoId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProgramsProgramIdRoute = ProgramsProgramIdImport.update({
+  path: '/programs/$programId',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -54,25 +96,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/sign-in': {
-      id: '/sign-in'
+    '/programs/$programId': {
+      id: '/programs/$programId'
+      path: '/programs/$programId'
+      fullPath: '/programs/$programId'
+      preLoaderRoute: typeof ProgramsProgramIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/videos/$videoId': {
+      id: '/videos/$videoId'
+      path: '/videos/$videoId'
+      fullPath: '/videos/$videoId'
+      preLoaderRoute: typeof VideosVideoIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/collections/': {
+      id: '/collections/'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/programs/': {
+      id: '/programs/'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/sign-in/': {
+      id: '/sign-in/'
       path: '/sign-in'
       fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInLazyImport
+      preLoaderRoute: typeof SignInIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/sign-up': {
-      id: '/sign-up'
+    '/sign-up/': {
+      id: '/sign-up/'
       path: '/sign-up'
       fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/user': {
-      id: '/user'
-      path: '/user'
-      fullPath: '/user'
-      preLoaderRoute: typeof UserLazyImport
+      preLoaderRoute: typeof SignUpIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -82,9 +166,15 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
-  SignInLazyRoute,
-  SignUpLazyRoute,
-  UserLazyRoute,
+  ProgramsProgramIdRoute,
+  VideosVideoIdRoute,
+  AboutIndexLazyRoute,
+  CollectionsIndexLazyRoute,
+  DashboardIndexLazyRoute,
+  ProfileIndexLazyRoute,
+  ProgramsIndexLazyRoute,
+  SignInIndexLazyRoute,
+  SignUpIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -96,22 +186,46 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/sign-in",
-        "/sign-up",
-        "/user"
+        "/programs/$programId",
+        "/videos/$videoId",
+        "/about/",
+        "/collections/",
+        "/dashboard/",
+        "/profile/",
+        "/programs/",
+        "/sign-in/",
+        "/sign-up/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/sign-in": {
-      "filePath": "sign-in.lazy.tsx"
+    "/programs/$programId": {
+      "filePath": "programs/$programId.tsx"
     },
-    "/sign-up": {
-      "filePath": "sign-up.lazy.tsx"
+    "/videos/$videoId": {
+      "filePath": "videos/$videoId.tsx"
     },
-    "/user": {
-      "filePath": "user.lazy.tsx"
+    "/about/": {
+      "filePath": "about/index.lazy.tsx"
+    },
+    "/collections/": {
+      "filePath": "collections/index.lazy.tsx"
+    },
+    "/dashboard/": {
+      "filePath": "dashboard/index.lazy.tsx"
+    },
+    "/profile/": {
+      "filePath": "profile/index.lazy.tsx"
+    },
+    "/programs/": {
+      "filePath": "programs/index.lazy.tsx"
+    },
+    "/sign-in/": {
+      "filePath": "sign-in/index.lazy.tsx"
+    },
+    "/sign-up/": {
+      "filePath": "sign-up/index.lazy.tsx"
     }
   }
 }
