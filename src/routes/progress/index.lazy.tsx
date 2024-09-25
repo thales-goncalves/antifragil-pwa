@@ -179,30 +179,29 @@ const CalendarView: React.FC = () => {
     return days
   }
 
-  const renderDailyView = () => {
-    const date = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
-    const dayActivities = activities[date] || []
+  // const renderDailyView = () => {
+  //   const date = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
+  //   const dayActivities = activities[date] || []
 
-    return (
-      <div className="bg-gray-800 mx-4 rounded-lg p-4 mt-4">
-        <h2 className="text-lg font-semibold mb-4">Activities for {selectedDate.toDateString()}</h2>
-        {dayActivities.length > 0 ? (
-          dayActivities.map((activity, index) => (
-            <div key={index} className="mb-2 p-2 bg-gray-700 rounded">
-              <p className="font-medium">{activity.type}</p>
-              <p className="text-sm text-gray-400">Duration: {activity.duration}</p>
-            </div>
-          ))
-        ) : (
-          <p>No activities recorded for this day.</p>
-        )}
-      </div>
-    )
-  }
+  //   return (
+  //     <div className="bg-gray-800 mx-4 rounded-lg mt-4">
+  //       <h2 className="text-lg font-semibold mb-4">Activities for {selectedDate.toDateString()}</h2>
+  //       {dayActivities.length > 0 ? (
+  //         dayActivities.map((activity, index) => (
+  //           <div key={index} className="mb-2 p-2 bg-gray-700 rounded">
+  //             <p className="font-medium">{activity.type}</p>
+  //             <p className="text-sm text-gray-400">Duration: {activity.duration}</p>
+  //           </div>
+  //         ))
+  //       ) : (
+  //         <p>No activities recorded for this day.</p>
+  //       )}
+  //     </div>
+  //   )
+  // }
 
   return (
-    <>
-      <div className="bg-gray-800 mx-4 rounded-lg ">
+      <div className="bg-gray-800 p-4 rounded-lg mt-20">
         <div className="flex justify-between items-center mb-4">
           <ChevronLeft className="text-gray-500" onClick={() => setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1))} />
           <span>{selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</span>
@@ -215,8 +214,6 @@ const CalendarView: React.FC = () => {
           {renderCalendar()}
         </div>
       </div>
-      {renderDailyView()}
-    </>
   )
 }
 
