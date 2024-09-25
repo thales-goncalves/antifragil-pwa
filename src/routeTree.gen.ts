@@ -21,6 +21,7 @@ import { Route as ProgramsProgramIdImport } from './routes/programs/$programId'
 const IndexLazyImport = createFileRoute('/')()
 const SignUpIndexLazyImport = createFileRoute('/sign-up/')()
 const SignInIndexLazyImport = createFileRoute('/sign-in/')()
+const ProgressIndexLazyImport = createFileRoute('/progress/')()
 const ProgramsIndexLazyImport = createFileRoute('/programs/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
@@ -43,6 +44,13 @@ const SignInIndexLazyRoute = SignInIndexLazyImport.update({
   path: '/sign-in/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/sign-in/index.lazy').then((d) => d.Route))
+
+const ProgressIndexLazyRoute = ProgressIndexLazyImport.update({
+  path: '/progress/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/progress/index.lazy').then((d) => d.Route),
+)
 
 const ProgramsIndexLazyRoute = ProgramsIndexLazyImport.update({
   path: '/programs/',
@@ -145,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/progress/': {
+      id: '/progress/'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/sign-in/': {
       id: '/sign-in/'
       path: '/sign-in'
@@ -173,6 +188,7 @@ export const routeTree = rootRoute.addChildren({
   DashboardIndexLazyRoute,
   ProfileIndexLazyRoute,
   ProgramsIndexLazyRoute,
+  ProgressIndexLazyRoute,
   SignInIndexLazyRoute,
   SignUpIndexLazyRoute,
 })
@@ -193,6 +209,7 @@ export const routeTree = rootRoute.addChildren({
         "/dashboard/",
         "/profile/",
         "/programs/",
+        "/progress/",
         "/sign-in/",
         "/sign-up/"
       ]
@@ -220,6 +237,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/programs/": {
       "filePath": "programs/index.lazy.tsx"
+    },
+    "/progress/": {
+      "filePath": "progress/index.lazy.tsx"
     },
     "/sign-in/": {
       "filePath": "sign-in/index.lazy.tsx"
