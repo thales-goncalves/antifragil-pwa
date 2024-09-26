@@ -31,6 +31,7 @@ const ProgressIndexLazyImport = createFileRoute('/progress/')()
 const ProgramsIndexLazyImport = createFileRoute('/programs/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const PersonalDataIndexLazyImport = createFileRoute('/personal-data/')()
+const HomeV2IndexLazyImport = createFileRoute('/home-v2/')()
 const HelpCenterIndexLazyImport = createFileRoute('/help-center/')()
 const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
 const CollectionsIndexLazyImport = createFileRoute('/collections/')()
@@ -123,6 +124,11 @@ const PersonalDataIndexLazyRoute = PersonalDataIndexLazyImport.update({
 } as any).lazy(() =>
   import('./routes/personal-data/index.lazy').then((d) => d.Route),
 )
+
+const HomeV2IndexLazyRoute = HomeV2IndexLazyImport.update({
+  path: '/home-v2/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/home-v2/index.lazy').then((d) => d.Route))
 
 const HelpCenterIndexLazyRoute = HelpCenterIndexLazyImport.update({
   path: '/help-center/',
@@ -251,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpCenterIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/home-v2/': {
+      id: '/home-v2/'
+      path: '/home-v2'
+      fullPath: '/home-v2'
+      preLoaderRoute: typeof HomeV2IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/personal-data/': {
       id: '/personal-data/'
       path: '/personal-data'
@@ -357,6 +370,7 @@ export const routeTree = rootRoute.addChildren({
   CollectionsIndexLazyRoute,
   DashboardIndexLazyRoute,
   HelpCenterIndexLazyRoute,
+  HomeV2IndexLazyRoute,
   PersonalDataIndexLazyRoute,
   ProfileIndexLazyRoute,
   ProgramsIndexLazyRoute,
@@ -389,6 +403,7 @@ export const routeTree = rootRoute.addChildren({
         "/collections/",
         "/dashboard/",
         "/help-center/",
+        "/home-v2/",
         "/personal-data/",
         "/profile/",
         "/programs/",
@@ -430,6 +445,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/help-center/": {
       "filePath": "help-center/index.lazy.tsx"
+    },
+    "/home-v2/": {
+      "filePath": "home-v2/index.lazy.tsx"
     },
     "/personal-data/": {
       "filePath": "personal-data/index.lazy.tsx"
