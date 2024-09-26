@@ -19,14 +19,25 @@ import { Route as ProgramsProgramIdImport } from './routes/programs/$programId'
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute('/')()
+const WorkoutIndexLazyImport = createFileRoute('/workout/')()
+const VideoDetailIndexLazyImport = createFileRoute('/video-detail/')()
 const SignUpIndexLazyImport = createFileRoute('/sign-up/')()
 const SignInIndexLazyImport = createFileRoute('/sign-in/')()
 const ProgressIndexLazyImport = createFileRoute('/progress/')()
 const ProgramsIndexLazyImport = createFileRoute('/programs/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
+const PersonalDataIndexLazyImport = createFileRoute('/personal-data/')()
+const HelpCenterIndexLazyImport = createFileRoute('/help-center/')()
 const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
 const CollectionsIndexLazyImport = createFileRoute('/collections/')()
+const BookingSuccessfulIndexLazyImport = createFileRoute(
+  '/booking-successful/',
+)()
+const AccountIndexLazyImport = createFileRoute('/account/')()
 const AboutIndexLazyImport = createFileRoute('/about/')()
+const VideoDetailVideoFeedbackIndexLazyImport = createFileRoute(
+  '/video-detail/video-feedback/',
+)()
 
 // Create/Update Routes
 
@@ -34,6 +45,18 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const WorkoutIndexLazyRoute = WorkoutIndexLazyImport.update({
+  path: '/workout/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/workout/index.lazy').then((d) => d.Route))
+
+const VideoDetailIndexLazyRoute = VideoDetailIndexLazyImport.update({
+  path: '/video-detail/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/video-detail/index.lazy').then((d) => d.Route),
+)
 
 const SignUpIndexLazyRoute = SignUpIndexLazyImport.update({
   path: '/sign-up/',
@@ -64,6 +87,20 @@ const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
 
+const PersonalDataIndexLazyRoute = PersonalDataIndexLazyImport.update({
+  path: '/personal-data/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/personal-data/index.lazy').then((d) => d.Route),
+)
+
+const HelpCenterIndexLazyRoute = HelpCenterIndexLazyImport.update({
+  path: '/help-center/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/help-center/index.lazy').then((d) => d.Route),
+)
+
 const DashboardIndexLazyRoute = DashboardIndexLazyImport.update({
   path: '/dashboard/',
   getParentRoute: () => rootRoute,
@@ -77,6 +114,20 @@ const CollectionsIndexLazyRoute = CollectionsIndexLazyImport.update({
 } as any).lazy(() =>
   import('./routes/collections/index.lazy').then((d) => d.Route),
 )
+
+const BookingSuccessfulIndexLazyRoute = BookingSuccessfulIndexLazyImport.update(
+  {
+    path: '/booking-successful/',
+    getParentRoute: () => rootRoute,
+  } as any,
+).lazy(() =>
+  import('./routes/booking-successful/index.lazy').then((d) => d.Route),
+)
+
+const AccountIndexLazyRoute = AccountIndexLazyImport.update({
+  path: '/account/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/account/index.lazy').then((d) => d.Route))
 
 const AboutIndexLazyRoute = AboutIndexLazyImport.update({
   path: '/about/',
@@ -92,6 +143,16 @@ const ProgramsProgramIdRoute = ProgramsProgramIdImport.update({
   path: '/programs/$programId',
   getParentRoute: () => rootRoute,
 } as any)
+
+const VideoDetailVideoFeedbackIndexLazyRoute =
+  VideoDetailVideoFeedbackIndexLazyImport.update({
+    path: '/video-detail/video-feedback/',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/video-detail/video-feedback/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
@@ -125,6 +186,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/booking-successful/': {
+      id: '/booking-successful/'
+      path: '/booking-successful'
+      fullPath: '/booking-successful'
+      preLoaderRoute: typeof BookingSuccessfulIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/collections/': {
       id: '/collections/'
       path: '/collections'
@@ -137,6 +212,20 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/help-center/': {
+      id: '/help-center/'
+      path: '/help-center'
+      fullPath: '/help-center'
+      preLoaderRoute: typeof HelpCenterIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/personal-data/': {
+      id: '/personal-data/'
+      path: '/personal-data'
+      fullPath: '/personal-data'
+      preLoaderRoute: typeof PersonalDataIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/profile/': {
@@ -174,6 +263,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/video-detail/': {
+      id: '/video-detail/'
+      path: '/video-detail'
+      fullPath: '/video-detail'
+      preLoaderRoute: typeof VideoDetailIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/workout/': {
+      id: '/workout/'
+      path: '/workout'
+      fullPath: '/workout'
+      preLoaderRoute: typeof WorkoutIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/video-detail/video-feedback/': {
+      id: '/video-detail/video-feedback/'
+      path: '/video-detail/video-feedback'
+      fullPath: '/video-detail/video-feedback'
+      preLoaderRoute: typeof VideoDetailVideoFeedbackIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -184,13 +294,20 @@ export const routeTree = rootRoute.addChildren({
   ProgramsProgramIdRoute,
   VideosVideoIdRoute,
   AboutIndexLazyRoute,
+  AccountIndexLazyRoute,
+  BookingSuccessfulIndexLazyRoute,
   CollectionsIndexLazyRoute,
   DashboardIndexLazyRoute,
+  HelpCenterIndexLazyRoute,
+  PersonalDataIndexLazyRoute,
   ProfileIndexLazyRoute,
   ProgramsIndexLazyRoute,
   ProgressIndexLazyRoute,
   SignInIndexLazyRoute,
   SignUpIndexLazyRoute,
+  VideoDetailIndexLazyRoute,
+  WorkoutIndexLazyRoute,
+  VideoDetailVideoFeedbackIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -205,13 +322,20 @@ export const routeTree = rootRoute.addChildren({
         "/programs/$programId",
         "/videos/$videoId",
         "/about/",
+        "/account/",
+        "/booking-successful/",
         "/collections/",
         "/dashboard/",
+        "/help-center/",
+        "/personal-data/",
         "/profile/",
         "/programs/",
         "/progress/",
         "/sign-in/",
-        "/sign-up/"
+        "/sign-up/",
+        "/video-detail/",
+        "/workout/",
+        "/video-detail/video-feedback/"
       ]
     },
     "/": {
@@ -226,11 +350,23 @@ export const routeTree = rootRoute.addChildren({
     "/about/": {
       "filePath": "about/index.lazy.tsx"
     },
+    "/account/": {
+      "filePath": "account/index.lazy.tsx"
+    },
+    "/booking-successful/": {
+      "filePath": "booking-successful/index.lazy.tsx"
+    },
     "/collections/": {
       "filePath": "collections/index.lazy.tsx"
     },
     "/dashboard/": {
       "filePath": "dashboard/index.lazy.tsx"
+    },
+    "/help-center/": {
+      "filePath": "help-center/index.lazy.tsx"
+    },
+    "/personal-data/": {
+      "filePath": "personal-data/index.lazy.tsx"
     },
     "/profile/": {
       "filePath": "profile/index.lazy.tsx"
@@ -246,6 +382,15 @@ export const routeTree = rootRoute.addChildren({
     },
     "/sign-up/": {
       "filePath": "sign-up/index.lazy.tsx"
+    },
+    "/video-detail/": {
+      "filePath": "video-detail/index.lazy.tsx"
+    },
+    "/workout/": {
+      "filePath": "workout/index.lazy.tsx"
+    },
+    "/video-detail/video-feedback/": {
+      "filePath": "video-detail/video-feedback/index.lazy.tsx"
     }
   }
 }

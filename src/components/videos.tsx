@@ -14,7 +14,7 @@ export const Videos = () => {
   }, [])
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 p-6">
       <div>
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-semibold">Programs</h3>

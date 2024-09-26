@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { ArrowLeft, MoreVertical } from 'lucide-react'
+import { ArrowLeft, Crown, MoreVertical } from 'lucide-react'
 
 interface ProgramCard {
   title: string;
@@ -17,7 +17,7 @@ const programs: ProgramCard[] = [
 
 const CollectionsPage = () => {
   return (
-    <div className="w-full  text-white">
+    <div className="w-full  text-white p-6">
       <header className="flex justify-between items-center mb-6">
         <button className="p-2">
           <ArrowLeft size={24} />
@@ -37,7 +37,10 @@ const CollectionsPage = () => {
             <div className="flex justify-between items-start">
               <h3 className="text-lg font-semibold">{program.title}</h3>
               {program.isPro && (
-                <span className="bg-green-500 text-xs font-bold px-2 py-1 rounded">Pro</span>
+                <div className="flex bg-green-900 items-center text-xs text-green-400 font-bold px-2 py-1 rounded-full">
+                  <Crown className='h-3 w-3 mr-1'/>
+                  Pro
+                </div>
               )}
             </div>
             <p className="text-sm">{program.duration} min</p>
