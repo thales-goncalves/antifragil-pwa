@@ -20,9 +20,13 @@ import { Route as ProgramsProgramIdImport } from './routes/programs/$programId'
 
 const IndexLazyImport = createFileRoute('/')()
 const WorkoutIndexLazyImport = createFileRoute('/workout/')()
+const WelcomeIndexLazyImport = createFileRoute('/welcome/')()
 const VideoDetailIndexLazyImport = createFileRoute('/video-detail/')()
 const SignUpIndexLazyImport = createFileRoute('/sign-up/')()
 const SignInIndexLazyImport = createFileRoute('/sign-in/')()
+const SetupAccount3IndexLazyImport = createFileRoute('/setup-account-3/')()
+const SetupAccount2IndexLazyImport = createFileRoute('/setup-account-2/')()
+const SetupAccount1IndexLazyImport = createFileRoute('/setup-account-1/')()
 const ProgressIndexLazyImport = createFileRoute('/progress/')()
 const ProgramsIndexLazyImport = createFileRoute('/programs/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
@@ -51,6 +55,11 @@ const WorkoutIndexLazyRoute = WorkoutIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/workout/index.lazy').then((d) => d.Route))
 
+const WelcomeIndexLazyRoute = WelcomeIndexLazyImport.update({
+  path: '/welcome/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/welcome/index.lazy').then((d) => d.Route))
+
 const VideoDetailIndexLazyRoute = VideoDetailIndexLazyImport.update({
   path: '/video-detail/',
   getParentRoute: () => rootRoute,
@@ -67,6 +76,27 @@ const SignInIndexLazyRoute = SignInIndexLazyImport.update({
   path: '/sign-in/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/sign-in/index.lazy').then((d) => d.Route))
+
+const SetupAccount3IndexLazyRoute = SetupAccount3IndexLazyImport.update({
+  path: '/setup-account-3/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/setup-account-3/index.lazy').then((d) => d.Route),
+)
+
+const SetupAccount2IndexLazyRoute = SetupAccount2IndexLazyImport.update({
+  path: '/setup-account-2/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/setup-account-2/index.lazy').then((d) => d.Route),
+)
+
+const SetupAccount1IndexLazyRoute = SetupAccount1IndexLazyImport.update({
+  path: '/setup-account-1/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/setup-account-1/index.lazy').then((d) => d.Route),
+)
 
 const ProgressIndexLazyRoute = ProgressIndexLazyImport.update({
   path: '/progress/',
@@ -249,6 +279,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/setup-account-1/': {
+      id: '/setup-account-1/'
+      path: '/setup-account-1'
+      fullPath: '/setup-account-1'
+      preLoaderRoute: typeof SetupAccount1IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/setup-account-2/': {
+      id: '/setup-account-2/'
+      path: '/setup-account-2'
+      fullPath: '/setup-account-2'
+      preLoaderRoute: typeof SetupAccount2IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/setup-account-3/': {
+      id: '/setup-account-3/'
+      path: '/setup-account-3'
+      fullPath: '/setup-account-3'
+      preLoaderRoute: typeof SetupAccount3IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/sign-in/': {
       id: '/sign-in/'
       path: '/sign-in'
@@ -268,6 +319,13 @@ declare module '@tanstack/react-router' {
       path: '/video-detail'
       fullPath: '/video-detail'
       preLoaderRoute: typeof VideoDetailIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/welcome/': {
+      id: '/welcome/'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/workout/': {
@@ -303,9 +361,13 @@ export const routeTree = rootRoute.addChildren({
   ProfileIndexLazyRoute,
   ProgramsIndexLazyRoute,
   ProgressIndexLazyRoute,
+  SetupAccount1IndexLazyRoute,
+  SetupAccount2IndexLazyRoute,
+  SetupAccount3IndexLazyRoute,
   SignInIndexLazyRoute,
   SignUpIndexLazyRoute,
   VideoDetailIndexLazyRoute,
+  WelcomeIndexLazyRoute,
   WorkoutIndexLazyRoute,
   VideoDetailVideoFeedbackIndexLazyRoute,
 })
@@ -331,9 +393,13 @@ export const routeTree = rootRoute.addChildren({
         "/profile/",
         "/programs/",
         "/progress/",
+        "/setup-account-1/",
+        "/setup-account-2/",
+        "/setup-account-3/",
         "/sign-in/",
         "/sign-up/",
         "/video-detail/",
+        "/welcome/",
         "/workout/",
         "/video-detail/video-feedback/"
       ]
@@ -377,6 +443,15 @@ export const routeTree = rootRoute.addChildren({
     "/progress/": {
       "filePath": "progress/index.lazy.tsx"
     },
+    "/setup-account-1/": {
+      "filePath": "setup-account-1/index.lazy.tsx"
+    },
+    "/setup-account-2/": {
+      "filePath": "setup-account-2/index.lazy.tsx"
+    },
+    "/setup-account-3/": {
+      "filePath": "setup-account-3/index.lazy.tsx"
+    },
     "/sign-in/": {
       "filePath": "sign-in/index.lazy.tsx"
     },
@@ -385,6 +460,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/video-detail/": {
       "filePath": "video-detail/index.lazy.tsx"
+    },
+    "/welcome/": {
+      "filePath": "welcome/index.lazy.tsx"
     },
     "/workout/": {
       "filePath": "workout/index.lazy.tsx"

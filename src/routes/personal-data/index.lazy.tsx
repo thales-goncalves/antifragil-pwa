@@ -10,12 +10,15 @@ const PersonalDataPage = () => {
 
   return (
     <div className="min-h-[90dvh] p-6 flex flex-col text-white">
-      <div className="flex items-center mb-6">
-        <Button variant="ghost" size="icon" onClick={() => navigate({ to: '/account' })}>
-          <ChevronLeft className="h-6 w-6" />
-        </Button>
-        <h1 className="text-xl font-semibold ml-4">Personal Data</h1>
-      </div>
+      {/* Nav Header */}
+      <div className="flex items-center flex-row mb-6 justify-between w-full">
+          <Button variant="ghost" size="icon" className=' bg-gray-900 rounded-full' onClick={() => navigate({ to: '/' })}>
+            <ChevronLeft className="h-6 w-6 text-gray-300" />
+          </Button>
+          <h1 className="text-xl font-semibold ml-4">Personal Data</h1>
+          <div className="min-w-10"></div>
+        </div>
+      {/* Nav Header */}
 
       <div className="space-y-4 flex-grow">
         <div>

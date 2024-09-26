@@ -3,14 +3,15 @@ import { useState } from 'react'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
-const feedbackOptions = [
-  "The video was fun",
-  "I struggled",
-  "It helped me motivativate myself",
-  "I want more videos like this"
+const motivationsOptions = [
+  "Add variety to my routine",
+  "Establish healthier habits",
+  "Find a motivation workout time",
+  "Workout with friends",
+  "Others"
 ]
 
-function VideoFeedbackScreen() {
+function SetupAccount() {
   const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set())
   const navigate = useNavigate()
 
@@ -24,10 +25,6 @@ function VideoFeedbackScreen() {
       }
       return newSet
     })
-  }
-
-  const handleNext = () => {
-    console.log("Selected options:", Array.from(selectedOptions))
   }
 
   return (
@@ -44,7 +41,7 @@ function VideoFeedbackScreen() {
       {/* Nav Header */}
       {/* Feedback Options */}
       <div className="flex flex-col flex-1 space-y-4 items-center justify-center">
-        {feedbackOptions.map((option) => (
+        {motivationsOptions.map((option) => (
           <button
             key={option}
             className={`w-full p-4 rounded-xl flex justify-between items-center border ${
@@ -69,7 +66,7 @@ function VideoFeedbackScreen() {
         <Button 
           className="w-full bg-green-500 hover:bg-green-600" 
           size="lg"
-          onClick={handleNext}
+          onClick={() => navigate({ to: '/setup-account-2' })}
         >
           Next
         </Button>
@@ -77,6 +74,6 @@ function VideoFeedbackScreen() {
     </div>
   )
 }
-export const Route = createLazyFileRoute('/video-detail/video-feedback/')({
-  component: VideoFeedbackScreen
+export const Route = createLazyFileRoute('/setup-account-1/')({
+  component: SetupAccount
 })
